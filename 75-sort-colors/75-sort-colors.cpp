@@ -4,7 +4,6 @@ public:
         int i = 0;
         int left = 0;
         int right = nums.size() - 1;
-        
         while(i <= right)
         {
             if(nums[i] == 0)
