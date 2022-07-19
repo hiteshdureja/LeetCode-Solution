@@ -7,25 +7,20 @@
  *     ListNode(int x) : val(x), next(nullptr) {}
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
- */
+ */ //
+    
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if(!head){
+
+        if(head==NULL||head->next==NULL) // when linked list has 0 or 1 element
+        {
             return head;
         }
-        stack<int>stk;
-        ListNode *temp=head;
-        while(head!=nullptr){
-            stk.push(head->val);
-            head=head->next;
-        }
-        head=temp;
-        while(!stk.empty()){
-            head->val = stk.top();
-            stk.pop();
-            head=head->next;
-        }
-        return temp;
+        ListNode* newhead=reverseList(head->next);//recursion se naya head aa gya jo last element hoga
+        head->next->next=head;//
+        head->next=NULL;
+        
+        return newhead;
     }
 };
