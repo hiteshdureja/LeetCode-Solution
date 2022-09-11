@@ -4,9 +4,7 @@ public:
         int n = intervals.size();
         int i = 0;
         vector<vector<int>> res;
-        
         while(i<n && intervals[i][1] < newInterval[0]) res.push_back(intervals[i++]); 
-        
         vector<int> in = newInterval;
         while(i<n && intervals[i][0] <= newInterval[1]){
             in[0] = min(in[0], intervals[i][0]);
@@ -14,7 +12,6 @@ public:
             i++;
         }
         res.push_back(in);
-        
         while(i<n) res.push_back(intervals[i++]); 
         return res;
     }
