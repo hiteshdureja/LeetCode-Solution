@@ -1,22 +1,26 @@
 class Solution {
 public:
-    int helper(int i, int j,vector<vector<int>>& grid)
-    {
-        if(i>=grid.size())
-            return j;
-        else if(grid[i][j]==1 && j+1<grid[0].size() && grid[i][j+1]==1)
-            return helper(i+1, j+1, grid);
-        else if(grid[i][j]==-1 && j-1>=0 && grid[i][j-1]==-1)
-            return helper(i+1, j-1, grid);
-        else
-            return -1;
-    }
-    vector<int> findBall(vector<vector<int>>& grid) {       
-        int row = grid.size();
-        int col = grid[0].size();
-        vector<int> ans(col);
-        for(int j=0; j<col; j++)
-            ans[j] = helper(0, j, grid);
-        return ans;
+    vector<int> findBall(vector<vector<int>>& grid) {
+        vector<int> result(grid[0].size(), 0);
+        vector<vector<int>> memo(grid.size() + 1, vector<int>(grid[0].size(), 0));
+
+        for (int row = int(grid.size()); row >= 0; row--) {
+            for (int col = 0; col < grid[0].size(); col++) {
+                if (row == grid.size()) {
+                    memo[row][col] = col;
+                    continue;
+                }
+                int nextColumn = col + grid[row][col];
+                if (nextColumn < 0 || nextColumn > grid[0].size() - 1 ||
+                    grid[row][col] != grid[row][nextColumn])
+                    memo[row][col] = -1;
+                else
+                    memo[row][col] = memo[row + 1][nextColumn];
+                if (row == 0) {
+                    result[col] = memo[row][col];
+                }
+            }
+        }
+        return result;
     }
 };
