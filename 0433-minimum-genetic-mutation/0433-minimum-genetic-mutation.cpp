@@ -1,38 +1,30 @@
 class Solution {
 public:
     int minMutation(string start, string end, vector<string>& bank) {
-        queue<string> queue;
-        unordered_set<string> seen;
-        queue.push(start);
-        seen.insert(start);
-        
-        int steps = 0;
-        while (!queue.empty()) {
-            int nodesInQueue = queue.size();
-            
-            for (int j = 0; j < nodesInQueue; j++) {
-                string node = queue.front();
-                queue.pop();
-
-                if (node == end) {
-                    return steps;
-                }
-                
-                for (char c: "ACGT") {
-                    for (int i = 0; i < node.size(); i++) {
-                        string neighbor = node;
-                        neighbor[i] = c;
-                        if (!seen.count(neighbor) && find(bank.begin(), bank.end(), neighbor) != bank.end()) {
-                            queue.push(neighbor);
-                            seen.insert(neighbor);
-                        }
-                    }
-                }
-            }
-            
-            steps++;
-        }
-        
-        return -1;
+        unordered_set<string> str{bank.begin(),bank.end()};
+	if(!str.count(end)) return -1;
+	queue<string> Q;
+	Q.push(start);
+	int steps=0,s;
+	string cur,t;
+	while(!Q.empty()){
+		s=Q.size();
+		while(s--){
+			cur=Q.front();
+			Q.pop();
+			if(cur==end) return steps;
+			str.erase(cur);
+			for(int i=0;i<8;i++){
+				t=cur;
+				t[i]='A';
+				if(str.count(t)) Q.push(t);
+				t[i]='C';
+				if(str.count(t)) Q.push(t);
+				t[i]='G';
+				if(str.count(t)) Q.push(t);
+				t[i]='T';
+				if(str.count(t)) Q.push(t);}}
+		steps++;}
+	return -1;
     }
 };
