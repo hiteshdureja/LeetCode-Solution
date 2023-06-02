@@ -15,7 +15,7 @@ public:
         s+=a;
         int i=0;
         while(i<s.size()-1 && s[i]=='0')
-        i++;
+            i++;
         return s.substr(i, s.size());
     }
 };
