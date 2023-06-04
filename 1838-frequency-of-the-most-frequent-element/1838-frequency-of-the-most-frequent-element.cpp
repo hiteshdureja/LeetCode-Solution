@@ -1,19 +1,15 @@
 class Solution {
 public:
-    int maxFrequency(vector<int>& nums, long k) {
-        sort(nums.begin(), nums.end());
-        const int n = nums.size();
-        int j = 0;
-        int ans = 0;
-        for(int i = 0; i < n; i++) {
-            k += nums[i];
-
-            while(k < (long) nums[i] * (i - j + 1)) {
-                k -= nums[j];
-                j++;
-            }
-            ans = max(ans, i - j + 1);
+    int maxFrequency(vector<int>& nums, int k) {
+        int res = 1;
+        int j=nums.size() - 1;
+        sort(begin(nums), end(nums));
+        for (int i = nums.size() - 1; i > 0; --i) {
+            for (; j >= 0 && k >= nums[i] - nums[j]; --j)
+                k -= nums[i] - nums[j];
+            res = max(res, i - j);
+            k += (nums[i] - nums[i - 1]) * (i - j - 1);
         }
-        return ans;
+        return res;
     }
 };
