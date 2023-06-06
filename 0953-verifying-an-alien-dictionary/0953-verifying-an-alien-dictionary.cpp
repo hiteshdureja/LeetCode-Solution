@@ -9,9 +9,8 @@ public:
         {
             string first=words[i];
             string second=words[i+1];
-            int j=0;
             bool flag=false;
-            for( j=0;j<min(first.length(),second.length());j++)
+            for(int j=0;j<min(first.length(),second.length());j++)
             {
                 if(mp[first[j]]< mp[second[j]])
                 {  
