@@ -6,7 +6,6 @@ public:
         }
         vector<int> mp(26,0);
         for(auto i:s){
-            cout<<i;
             mp[i-'a']++;
         }
         for(auto i:t){
