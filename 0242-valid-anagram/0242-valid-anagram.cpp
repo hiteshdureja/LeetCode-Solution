@@ -4,7 +4,7 @@ public:
         if(s.length()!=t.length()){
             return false;
         }
-        vector<int> mp(26,0);
+        vector<int> mp(26);
         for(auto i:s){
             mp[i-'a']++;
         }
