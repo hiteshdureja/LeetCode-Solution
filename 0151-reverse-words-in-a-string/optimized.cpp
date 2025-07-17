@@ -8,7 +8,7 @@ int main()
     a =  " " + a;
     string str = "";
     string ans = "";
-    for(int i = a.size(); i>=0;i--){
+    for(int i = a.size()-1; i>=0;i--){
         if(a[i] == ' '){
             if(str != ""){
                 
