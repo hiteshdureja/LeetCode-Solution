@@ -20,6 +20,8 @@ int main()
             str = a[i]+str;
         }
     }
+    if (!ans.empty() && ans.back() == ' ')
+        ans.pop_back();
     std::cout << "Reversed string:" << std::endl<<ans;
     return 0;
 }
