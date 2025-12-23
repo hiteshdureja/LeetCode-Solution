@@ -1,18 +1,22 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
-        if (numRows == 1) return s;
-        vector<string> rows(min(numRows, int(s.size())));
-        int curRow = 0;
-        bool goingDown = false;
-        for (char c : s) 
-         {
-            rows[curRow] += c;
-            if (curRow == 0 || curRow == numRows - 1) goingDown = !goingDown;
-            curRow += goingDown ? 1 : -1;
-        } 
-        string ret;
-        for (string row : rows) ret += row;
-        return ret;
+        vector<string> res(numRows,"");
+        string ans = "";
+        int idx = 0;
+        while(idx<s.size()){
+            for(int i = 0;i<numRows && idx<s.size();i++){
+                res[i].push_back(s[idx]);
+                idx++;
+            }
+            for(int i = numRows -2;i>0 && idx<s.size();i--){
+                res[i].push_back(s[idx]);
+                idx++;
+            }
+        }
+        for(string str: res){
+            ans+=str;
+        }
+        return ans;
     }
 };
